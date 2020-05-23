@@ -38,11 +38,11 @@ export default Vue.extend({
       })
     },
 
-    tokens(): MarkdownItToken[] {
+    markdownitTokens(): MarkdownItToken[] {
       return this.markdown.parse(this.value, {})
     },
 
-    Tokens(): Token[] {
+    tokens(): Token[] {
       return createAST({
         src: this.value,
         tokenizer: (src: string) => this.markdown.parse(src, {}),
@@ -69,7 +69,7 @@ export default Vue.extend({
         return <Component token={token}>{render(token.children)}</Component>
       })
 
-    return <div class="v-previewer">{render(this.Tokens)}</div>
+    return <div class="v-previewer">{render(this.tokens)}</div>
   },
 })
 </script>
@@ -81,10 +81,6 @@ export default Vue.extend({
 
   & > *:first-child {
     margin-top: 0 !important;
-  }
-
-  * {
-    max-width: 100%;
   }
 }
 </style>
