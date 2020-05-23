@@ -1,5 +1,16 @@
 import { Token } from './tokens'
 
+const removeLastBrs = (src: string): string =>
+  src
+    .split('\n')
+    .reduceRight((acc, cur) => {
+      if (acc.length > 0 || cur) {
+        acc.unshift(cur)
+      }
+      return acc
+    }, [] as string[])
+    .join('\n')
+
 export const tokensToString = (tokens: readonly Token[]): string => {
   const toStr = (tokens: readonly Token[]): string => {
     return tokens
@@ -37,6 +48,14 @@ export const tokensToString = (tokens: readonly Token[]): string => {
           case 'heading': {
             return `${token.markup} ${content}\n\n`
           }
+          case 'blockquote': {
+            const markAppended = removeLastBrs(content)
+              .split('\n')
+              .map(c => `${token.markup} ${c}`)
+              .join('\n')
+
+            return `${markAppended}\n\n`
+          }
         }
 
         return content
@@ -44,5 +63,5 @@ export const tokensToString = (tokens: readonly Token[]): string => {
       .join('')
   }
 
-  return toStr(tokens)
+  return removeLastBrs(toStr(tokens))
 }

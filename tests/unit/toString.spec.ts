@@ -1,9 +1,9 @@
 import { createAST, createMd, tokensToString } from '@/lib/markdown'
 
 const md = createMd()
-const check = (src: string) => () => {
+const check = (...src: string[]) => () => {
   const original = createAST({
-    src,
+    src: src.join('\n'),
     tokenizer: (src: string) => md.parse(src, {}),
   })
   const reshaped = createAST({
@@ -56,6 +56,18 @@ describe('lib/markdown', () => {
       describe('image', () => {
         test('normal', check('![placeholder](https://via.placeholder.com/1000)'))
         test('with title', check('![placeholder](https://via.placeholder.com/1000 "title")'))
+      })
+
+      describe('blockquote', () => {
+        test('one paragraph', check('> foobar'))
+        test(
+          'multi paragraph',
+          check(
+            '> first', //
+            '> ',
+            '> second',
+          ),
+        )
       })
     })
 
