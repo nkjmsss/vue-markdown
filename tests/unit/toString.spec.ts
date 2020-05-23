@@ -38,6 +38,8 @@ describe('lib/markdown', () => {
         test('normal', check('[link](https://example.com)'))
         test('with title', check('[link](https://example.com "title")'))
       })
+
+      test('code', check('`foobar`'))
     })
 
     // block rules

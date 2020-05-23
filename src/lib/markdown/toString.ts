@@ -12,7 +12,8 @@ export const tokensToString = (tokens: readonly Token[]): string => {
           case 'em':
           case 'ins':
           case 'mark':
-          case 's': {
+          case 's':
+          case 'code_inline': {
             const markup = token.markup
             return `${markup}${content}${markup}`
           }
