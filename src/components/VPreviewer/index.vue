@@ -67,13 +67,24 @@ export default Vue.extend({
   },
 
   render() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const render = (tokens: Token[]) =>
       tokens.map(token => {
         const Component = this.getComponent(token.type)
         return <Component token={token}>{render(token.children)}</Component>
       })
 
-    return <div class="v-previewer">{render(this.tokens)}</div>
+    // return <div class="v-previewer">{render(this.tokens)}</div>
+    return (
+      <div class="v-previewer">
+        <pre>
+          <code>{this.stringfiedTokens}</code>
+        </pre>
+        <pre>
+          <code>{JSON.stringify(this.markdownitTokens, null, 4)}</code>
+        </pre>
+      </div>
+    )
   },
 })
 </script>
