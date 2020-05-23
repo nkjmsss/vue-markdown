@@ -15,6 +15,8 @@ export default RendererBase.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/mixins';
+
 .renderer-table {
   width: 100%;
   overflow: scroll;

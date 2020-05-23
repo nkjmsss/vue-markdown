@@ -11,3 +11,7 @@ export default RendererBase.extend({
   name: 'RendererMark',
 })
 </script>
+
+<style lang="scss" scoped>
+@import '../styles/mixins';
+</style>

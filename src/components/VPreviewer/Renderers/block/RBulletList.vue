@@ -13,6 +13,8 @@ export default RendererBase.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/mixins';
+
 .renderer-bullet-list {
   padding-left: 1.5em;
 }

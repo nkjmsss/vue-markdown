@@ -13,6 +13,8 @@ export default RendererBase.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/mixins';
+
 .renderer-thead {
   background-color: #f2f2f2;
 }

@@ -13,6 +13,8 @@ export default RendererBase.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/mixins';
+
 .renderer-paragraph {
   margin: 0 0 1em;
 }
