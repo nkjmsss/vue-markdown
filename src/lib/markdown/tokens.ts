@@ -12,7 +12,7 @@ export interface MarkdownItToken extends Weaken<_MarkdownItToken, 'children' | '
 export interface Token {
   type: string
   tag: string
-  attrs: Record<string, string | undefined>
+  attrs: Record<string, any>
   children: Token[]
   content?: string
   info: string

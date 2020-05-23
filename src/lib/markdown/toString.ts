@@ -66,6 +66,10 @@ export const tokensToString = (tokens: readonly Token[]): string => {
           case 'bullet_list': {
             return token.children.map(t => `${t.markup} ${getContent(t)}`).join('\n')
           }
+          case 'ordered_list': {
+            const num = token.attrs.start !== undefined ? Number(token.attrs.start) : 1
+            return token.children.map(t => `${num}${t.markup} ${getContent(t)}`).join('\n')
+          }
         }
 
         return getContent(token)

@@ -97,6 +97,34 @@ describe('lib/markdown', () => {
           ),
         )
       })
+
+      describe('ordered_list', () => {
+        test('one element', check('1. foo'))
+        test('one element starts with 3', check('3. foo'))
+        test('one element starts with 0', check('0. foo'))
+        test(
+          'multiple element',
+          check(
+            '1. foo', //
+            '2. bar',
+          ),
+        )
+        test(
+          'multiple element with same number',
+          check(
+            '1. foo', //
+            '2. bar',
+          ),
+        )
+        test(
+          'multiple element with shuffled number',
+          check(
+            '1. foo', //
+            '3. bar',
+            '2. baz',
+          ),
+        )
+      })
     })
 
     // complicated
