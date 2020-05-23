@@ -7,5 +7,10 @@ export const RendererBase = Vue.extend({
       type: Object as PropType<Token>,
       required: true,
     },
+
+    editable: {
+      type: Boolean,
+      default: false,
+    },
   },
 })
