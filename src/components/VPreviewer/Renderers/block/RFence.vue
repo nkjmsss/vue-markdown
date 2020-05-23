@@ -14,13 +14,15 @@ export default RendererBase.extend({
 @import '../styles/mixins';
 
 .renderer-fence {
-  font-size: 0.85rem;
+  overflow: scroll;
+  font-size: 0.9rem;
   background-color: #f8f8f8;
 
   code {
     display: block;
     padding: 1.2em 1.5em;
-    font-size: 0.85rem;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.9rem;
     white-space: pre;
   }
 }

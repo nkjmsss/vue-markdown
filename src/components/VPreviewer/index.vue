@@ -39,10 +39,7 @@ export default Vue.extend({
     },
 
     tokens(): Token[] {
-      return createAST({
-        src: this.value,
-        tokenizer: (src: string) => this.markdown.parse(src, {}),
-      })
+      return this.tokenize(this.value)
     },
 
     stringfiedTokens(): string {
@@ -60,6 +57,13 @@ export default Vue.extend({
       }
       return fallbackComponent
     },
+
+    tokenize(src: string): Token[] {
+      return createAST({
+        src,
+        tokenizer: (src: string) => this.markdown.parse(src, {}),
+      })
+    },
   },
 
   render() {
@@ -73,11 +77,11 @@ export default Vue.extend({
     return (
       <div class="v-previewer">
         <pre>
-          <code>{this.stringfiedTokens}</code>
+          <code>{render(this.tokenize(`\`\`\`\n${this.stringfiedTokens}\n\`\`\``))}</code>
         </pre>
         <hr />
         <pre>
-          <code>{JSON.stringify(this.tokens, null, 4)}</code>
+          <code>{render(this.tokenize(`\`\`\`\n${JSON.stringify(this.tokens, null, 4)}\n\`\`\``))}</code>
         </pre>
         <hr />
         <div>{render(this.tokens)}</div>

@@ -10,7 +10,8 @@ export const tokensToString = (tokens: readonly Token[]): string => {
           case 'strong':
           case 'em':
           case 'ins':
-          case 'mark': {
+          case 'mark':
+          case 's': {
             const markup = token.markup
             return `${markup}${content}${markup}`
           }

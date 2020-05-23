@@ -20,6 +20,10 @@ export const sample = `# Vue-markdown
 
 \`==mark==\`というようにすると、==このように==なります。
 
+#### 打ち消し線
+
+\`~~strike~~\`というようにすると、~~このように~~なります。
+
 #### リンク
 
 \`[link](url)\`というようにすると、[link](https://example.com)になります。
@@ -77,17 +81,25 @@ export const sample = `# Vue-markdown
 #### 表
 
 \`\`\`
-|column1|column2|column3|
-|-|-|-|
-|content1|content2|content3|
-|content1|content2|content3|
+| Left align | Right align | Center align |
+|:-----------|------------:|:------------:|
+| This       | This        | This         |
+| column     | column      | column       |
+| will       | will        | will         |
+| be         | be          | be           |
+| left       | right       | center       |
+| aligned    | aligned     | aligned      |
 \`\`\`
 
 のようにコードを書きます。ハイフンの上側が見出し行として扱われます。
 
-|column1|column2|column3|
-|-|-|-|
-|content1|content2|content3|
-|content1|content2|content3|
+| Left align | Right align | Center align |
+|:-----------|------------:|:------------:|
+| This       | This        | This         |
+| column     | column      | column       |
+| will       | will        | will         |
+| be         | be          | be           |
+| left       | right       | center       |
+| aligned    | aligned     | aligned      |
 
 `

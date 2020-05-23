@@ -1,23 +1,26 @@
 import { VueConstructor } from 'vue'
+import RDefault from './RDefault.vue'
+
+import RCode from './inline/RCode.vue'
+import REm from './inline/REm.vue'
+import RIns from './inline/RIns.vue'
+import RLink from './inline/RLink.vue'
+import RMark from './inline/RMark.vue'
+import RS from './inline/RS.vue'
+import RText from './inline/RText.vue'
+
 import RBlockquote from './block/RBlockquote.vue'
 import RBulletList from './block/RBulletList.vue'
-import RCode from './inline/RCode.vue'
-import RDefault from './RDefault.vue'
-import REm from './inline/REm.vue'
 import RFence from './block/RFence.vue'
 import RHeading from './block/RHeading.vue'
 import RImage from './block/RImage.vue'
-import RIns from './inline/RIns.vue'
-import RLink from './inline/RLink.vue'
 import RListItem from './block/RListItem.vue'
-import RMark from './inline/RMark.vue'
 import ROrderedList from './block/ROrderedList.vue'
 import RParagraph from './block/RParagraph.vue'
 import RStrong from './inline/RStrong.vue'
 import RTable from './block/RTable.vue'
 import RTbody from './block/RTbody.vue'
 import RTd from './block/RTd.vue'
-import RText from './inline/RText.vue'
 import RTh from './block/RTh.vue'
 import RThead from './block/RThead.vue'
 import RTr from './block/RTr.vue'
@@ -114,6 +117,10 @@ const inline: Components = [
   {
     type: 'link',
     component: RLink,
+  },
+  {
+    type: 's',
+    component: RS,
   },
 ]
 

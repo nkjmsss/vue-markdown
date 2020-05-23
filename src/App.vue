@@ -16,12 +16,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-html,
-body {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html {
+  font-size: 16px;
 }
 </style>
 

@@ -33,6 +33,8 @@ describe('lib/markdown', () => {
 
       test('mark', check('==foobar=='))
 
+      test('s', check('~~foobar~~'))
+
       describe('link', () => {
         test('normal', check('[link](https://example.com)'))
 
