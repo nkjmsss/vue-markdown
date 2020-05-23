@@ -4,11 +4,12 @@ import mark from 'markdown-it-mark'
 
 export * from './tokens'
 export * from './ast'
+export * from './toString'
 
 export interface CreateMdOptions {
-  options: MarkdownIt.Options
-  disableRules: string[]
-  plugins: Array<Parameters<MarkdownItUse>>
+  options?: MarkdownIt.Options
+  disableRules?: string[]
+  plugins?: Array<Parameters<MarkdownItUse>>
 }
 
 type MarkdownItUse<T = any> =
@@ -16,7 +17,7 @@ type MarkdownItUse<T = any> =
   | ((plugin: MarkdownIt.PluginWithOptions<T>, options?: T) => MarkdownIt)
   | ((plugin: MarkdownIt.PluginWithParams, ...params: any[]) => MarkdownIt)
 
-export const createMd = ({ options, disableRules, plugins }: CreateMdOptions): MarkdownIt => {
+export const createMd = ({ options = {}, disableRules = [], plugins = [] }: CreateMdOptions = {}): MarkdownIt => {
   const markdown = MarkdownIt({
     html: true,
     xhtmlOut: false,

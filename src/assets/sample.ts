@@ -44,7 +44,7 @@ export const sample = `# Vue-markdown
 
 \`![name](href)\`というようにすると、画像が読み込めます。
 
-![cat](http://d30uxjjrk95rd.cloudfront.net/img/pages/pet_cat/cat_img_81.jpg)
+![placeholder](https://via.placeholder.com/1000)
 
 #### 引用
 
