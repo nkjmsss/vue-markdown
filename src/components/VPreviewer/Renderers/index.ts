@@ -1,4 +1,5 @@
 import { VueConstructor } from 'vue'
+import RBulletList from './block/RBulletList.vue'
 import RCode from './inline/RCode.vue'
 import RDefault from './RDefault.vue'
 import REm from './inline/REm.vue'
@@ -8,6 +9,7 @@ import RImage from './block/RImage.vue'
 import RIns from './inline/RIns.vue'
 import RLink from './inline/RLink.vue'
 import RMark from './inline/RMark.vue'
+import ROrderedList from './block/ROrderedList.vue'
 import RStrong from './inline/RStrong.vue'
 import RText from './inline/RText.vue'
 
@@ -28,6 +30,14 @@ const blocks: Components = [
   {
     type: 'fence',
     component: RFence,
+  },
+  {
+    type: 'bullet_list',
+    component: RBulletList,
+  },
+  {
+    type: 'ordered_list',
+    component: ROrderedList,
   },
 ]
 

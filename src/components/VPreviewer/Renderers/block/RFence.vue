@@ -1,5 +1,5 @@
 <template>
-  <pre class="renderer-fence"><code>{{token.content}}</code></pre>
+  <pre class="renderer-fence" v-bind="token.attrs"><code>{{token.content}}</code></pre>
 </template>
 
 <script lang="ts">
@@ -21,7 +21,6 @@ export default RendererBase.extend({
     display: block;
     padding: 1.2em 1.5em;
     font-size: 0.85rem;
-    line-height: 1.6;
     white-space: pre;
   }
 }

@@ -110,6 +110,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .v-previewer {
   padding: 10px 20px 20px;
+  line-height: 1.5;
 
   & > *:first-child {
     margin-top: 0 !important;
