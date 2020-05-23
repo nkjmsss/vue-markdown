@@ -1,4 +1,3 @@
-import color from 'markdown-it-color'
 import ins from 'markdown-it-ins'
 import mark from 'markdown-it-mark'
 import md from 'markdown-it'
@@ -19,8 +18,7 @@ markdown
   .disable('newline') // double space + \n won't be compiled to <br>
   .disable('code') // four space to make code block
 
-markdown
-  .use(color)
+markdown //
   .use(ins)
   .use(mark)
 
