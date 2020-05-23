@@ -3,18 +3,10 @@
 </template>
 
 <script lang="ts">
-import { Token } from '@/lib/markdown'
-import Vue, { PropType } from 'vue'
+import { RendererBase } from '../utils'
 
-export default Vue.extend({
+export default RendererBase.extend({
   name: 'RendererImage',
-
-  props: {
-    token: {
-      type: Object as PropType<Token>,
-      required: true,
-    },
-  },
 })
 </script>
 

@@ -5,18 +5,10 @@
 </template>
 
 <script lang="ts">
-import { Token } from '@/lib/markdown'
-import Vue, { PropType } from 'vue'
+import { RendererBase } from '../utils'
 
-export default Vue.extend({
+export default RendererBase.extend({
   name: 'RendererHeading',
-
-  props: {
-    token: {
-      type: Object as PropType<Token>,
-      required: true,
-    },
-  },
 
   computed: {
     level(): number {
@@ -28,56 +20,37 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '../utils/colors';
+@import '../styles/mixins';
 
 .renderer-heading {
   position: relative;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  font-weight: bolder;
-  line-height: 1.4;
+  font-weight: 600;
+  color: colors(text);
 
-  &--1 {
-    padding-bottom: 0.4rem;
-    font-size: 2.2rem;
-    line-height: 1.3;
-  }
-
-  &--1 + &--2 {
+  & + & {
     margin-top: 0;
   }
 
+  &--1 {
+    margin: 0 0 1em;
+    font-size: 2rem;
+  }
+
   &--2 {
-    padding: 0.4em 0.8em;
-    margin: 3.3em 0 0.8em;
+    padding-bottom: 0.7em;
+    margin: 45px 0 0.8em;
     font-size: 1.5rem;
-    line-height: 1.225;
-    background-color: rgba(colors(primary), 0.1);
-    border-left: 0.2em solid colors(primary);
+    border-bottom: 1px solid #ddd;
   }
 
   &--3 {
-    margin: 1.8em 0 0.9em;
+    margin: 52px 0 1.2em;
     font-size: 1.4rem;
-    line-height: 1.43;
-    color: colors(primary);
-    border-bottom: 2px solid colors(primary);
   }
 
   &--4 {
     margin: 1.6em 0 1em;
     font-size: 1.2rem;
-
-    &::before {
-      display: inline-block;
-      width: 0.6em;
-      height: 0.6em;
-      margin-right: 0.2em;
-      line-height: 1em;
-      content: '';
-      background-color: colors(primary);
-      border-radius: 0.15em;
-    }
   }
 
   &--5 {

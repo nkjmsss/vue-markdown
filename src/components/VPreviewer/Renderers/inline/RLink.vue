@@ -9,23 +9,15 @@
 </template>
 
 <script lang="ts">
-import { Token } from '@/lib/markdown'
-import Vue, { PropType } from 'vue'
+import { RendererBase } from '../utils'
 
-export default Vue.extend({
+export default RendererBase.extend({
   name: 'RendererLink',
-
-  props: {
-    token: {
-      type: Object as PropType<Token>,
-      required: true,
-    },
-  },
 
   computed: {
     internal(): boolean {
       // /で始まるかつ、2個以上/が続かない
-      return /^(?!\/{2,})\/(.*)/.test(this.token.attrs.href ?? '')
+      return /^(?!\/{2,})\/(.*)/.test(this.href)
     },
 
     attrs(): Record<string, string | undefined> {
@@ -35,7 +27,7 @@ export default Vue.extend({
     },
 
     href(): string {
-      return this.token.attrs.href ?? ''
+      return this.token.attrs.href || '/'
     },
   },
 })
