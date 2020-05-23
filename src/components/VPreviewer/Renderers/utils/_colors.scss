@@ -1,0 +1,24 @@
+$colors: (
+  text: (
+    base: #212c36,
+  ),
+  gray: (
+    base: #777,
+  ),
+  primary: (
+    base: #4dbac4,
+  ),
+  secondary: (
+    base: #d43f3f,
+  ),
+  mark: (
+    base: #ffff6f,
+  ),
+  button: (
+    base: #f18f01,
+  ),
+);
+
+@function colors($color, $tone: base) {
+  @return map-get(map-get($colors, $color), $tone);
+}
