@@ -2,6 +2,7 @@ import { VueConstructor } from 'vue'
 import RCode from './inline/RCode.vue'
 import RDefault from './RDefault.vue'
 import REm from './inline/REm.vue'
+import RFence from './block/RFence.vue'
 import RHeading from './block/RHeading.vue'
 import RImage from './block/RImage.vue'
 import RIns from './inline/RIns.vue'
@@ -23,6 +24,10 @@ const blocks: Components = [
   {
     type: 'image',
     component: RImage,
+  },
+  {
+    type: 'fence',
+    component: RFence,
   },
 ]
 

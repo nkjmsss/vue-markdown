@@ -9,3 +9,15 @@ export default RendererBase.extend({
   name: 'RendererCode',
 })
 </script>
+
+<style lang="scss" scoped>
+@import '../styles/mixins';
+
+.renderer-code {
+  padding: (3em/16) (5em/16);
+  color: colors(secondary);
+  white-space: nowrap;
+  background-color: #f8f8f8;
+  border-radius: 2px;
+}
+</style>
