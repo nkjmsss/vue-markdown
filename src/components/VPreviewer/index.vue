@@ -76,13 +76,13 @@ export default Vue.extend({
     // return <div class="v-previewer">{render(this.tokens)}</div>
     return (
       <div class="v-previewer">
-        <pre>
+        <pre style="max-height: 80vh; overflow: scroll;">
           <code>{render(this.tokenize(`\`\`\`\n${this.stringfiedTokens}\n\`\`\``))}</code>
         </pre>
         <hr />
         <details>
           <summary>tokens</summary>
-          <pre style="max-height: 100vh; overflow: scroll;">
+          <pre style="max-height: 80vh; overflow: scroll;">
             <code>{render(this.tokenize(`\`\`\`\n${JSON.stringify(this.tokens, null, 4)}\n\`\`\``))}</code>
           </pre>
         </details>

@@ -16,6 +16,7 @@ const check = (src: string) => () => {
 
 describe('lib/markdown', () => {
   describe('toString', () => {
+    // inline rules
     describe('inline', () => {
       test('text', check('sample text'))
 
@@ -39,6 +40,13 @@ describe('lib/markdown', () => {
         test('normal', check('[link](https://example.com)'))
 
         test('with title', check('[link](https://example.com "title")'))
+      })
+    })
+
+    // block rules
+    describe('block', () => {
+      describe('headings', () => {
+        test('h1', check('# heading'))
       })
     })
   })

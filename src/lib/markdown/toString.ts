@@ -7,6 +7,7 @@ export const tokensToString = (tokens: readonly Token[]): string => {
         const content = (token.children && token.children.length > 0 ? toStr(token.children) : token.content) || ''
 
         switch (token.type) {
+          // inline
           case 'strong':
           case 'em':
           case 'ins':
@@ -20,6 +21,14 @@ export const tokensToString = (tokens: readonly Token[]): string => {
             const title = token.attrs.title ? ` "${token.attrs.title}"` : ''
 
             return `[${content}](${href}${title})`
+          }
+
+          // block
+          case 'paragraph': {
+            return `${content}\n\n`
+          }
+          case 'heading': {
+            return `${token.markup} ${content}\n\n`
           }
         }
 
