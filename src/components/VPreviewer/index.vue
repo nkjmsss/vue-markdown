@@ -80,9 +80,12 @@ export default Vue.extend({
           <code>{render(this.tokenize(`\`\`\`\n${this.stringfiedTokens}\n\`\`\``))}</code>
         </pre>
         <hr />
-        <pre>
-          <code>{render(this.tokenize(`\`\`\`\n${JSON.stringify(this.tokens, null, 4)}\n\`\`\``))}</code>
-        </pre>
+        <details>
+          <summary>tokens</summary>
+          <pre style="max-height: 100vh; overflow: scroll;">
+            <code>{render(this.tokenize(`\`\`\`\n${JSON.stringify(this.tokens, null, 4)}\n\`\`\``))}</code>
+          </pre>
+        </details>
         <hr />
         <div>{render(this.tokens)}</div>
       </div>
