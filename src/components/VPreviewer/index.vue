@@ -1,16 +1,7 @@
 <script lang="tsx">
 import { Components, components, fallbackComponent } from './Renderers'
-import { MarkdownItToken, Token, createAST } from '@/lib/markdown'
-import MarkdownIt from 'markdown-it'
+import { CreateMdOptions, MarkdownItToken, Token, createAST, createMd } from '@/lib/markdown'
 import Vue, { PropType, VueConstructor } from 'vue'
-import ins from 'markdown-it-ins'
-import mark from 'markdown-it-mark'
-import md from 'markdown-it'
-
-type MarkdownItUse<T = any> =
-  | ((plugin: MarkdownIt.PluginSimple) => MarkdownIt)
-  | ((plugin: MarkdownIt.PluginWithOptions<T>, options?: T) => MarkdownIt)
-  | ((plugin: MarkdownIt.PluginWithParams, ...params: any[]) => MarkdownIt)
 
 export default Vue.extend({
   name: 'VPreviewer',
@@ -25,50 +16,26 @@ export default Vue.extend({
       default: () => [],
     },
     mdOptions: {
-      type: Object as PropType<Partial<md.Options>>,
+      type: Object as PropType<CreateMdOptions['options']>,
       default: () => ({}),
     },
-    mdDisables: {
-      type: Array as PropType<string[]>,
+    mdDisableRules: {
+      type: Array as PropType<CreateMdOptions['disableRules']>,
       default: () => [],
     },
     mdPlugins: {
-      type: Array as PropType<Array<Parameters<MarkdownItUse>>>,
+      type: Array as PropType<CreateMdOptions['plugins']>,
       default: () => [],
     },
   },
 
   computed: {
-    markdown(): MarkdownIt {
-      const markdown = md({
-        html: false,
-        xhtmlOut: false,
-        breaks: false,
-        langPrefix: 'lang-',
-        linkify: false,
-        typographer: true,
-        quotes: '“”‘’',
-        ...this.mdOptions,
+    markdown(): ReturnType<typeof createMd> {
+      return createMd({
+        options: this.mdOptions,
+        disableRules: this.mdDisableRules,
+        plugins: this.mdPlugins,
       })
-
-      markdown
-        .disable('lheading') // a special syntax for h1 and h2 (using "=" or "-" below the text)
-        .disable('code') // four space to make code block
-
-      markdown //
-        .use(ins)
-        .use(mark)
-
-      this.mdDisables.forEach(rule => {
-        markdown.disable(rule)
-      })
-
-      this.mdPlugins.forEach(plugin => {
-        const [p, ...opts] = plugin
-        markdown.use(p, ...opts)
-      })
-
-      return markdown
     },
 
     tokens(): MarkdownItToken[] {
