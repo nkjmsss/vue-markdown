@@ -86,6 +86,17 @@ describe('lib/markdown', () => {
           ),
         )
       })
+
+      describe('bullet_list', () => {
+        test('one element', check('- foo'))
+        test(
+          'multiple element',
+          check(
+            '- foo', //
+            '- bar',
+          ),
+        )
+      })
     })
 
     // complicated
