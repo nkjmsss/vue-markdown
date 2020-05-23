@@ -1,4 +1,4 @@
-# editor2
+# Vue-markdown
 
 ## Project setup
 ```
