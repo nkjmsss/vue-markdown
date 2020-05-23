@@ -22,6 +22,12 @@ export const tokensToString = (tokens: readonly Token[]): string => {
 
             return `[${content}](${href}${title})`
           }
+          case 'image': {
+            const src = token.attrs.src || ''
+            const title = token.attrs.title ? ` "${token.attrs.title}"` : ''
+
+            return `![${content}](${src}${title})`
+          }
 
           // block
           case 'paragraph': {

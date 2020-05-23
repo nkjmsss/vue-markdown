@@ -3,6 +3,7 @@ import RDefault from './RDefault.vue'
 
 import RCode from './inline/RCode.vue'
 import REm from './inline/REm.vue'
+import RImage from './inline/RImage.vue'
 import RIns from './inline/RIns.vue'
 import RLink from './inline/RLink.vue'
 import RMark from './inline/RMark.vue'
@@ -13,7 +14,6 @@ import RBlockquote from './block/RBlockquote.vue'
 import RBulletList from './block/RBulletList.vue'
 import RFence from './block/RFence.vue'
 import RHeading from './block/RHeading.vue'
-import RImage from './block/RImage.vue'
 import RListItem from './block/RListItem.vue'
 import ROrderedList from './block/ROrderedList.vue'
 import RParagraph from './block/RParagraph.vue'
@@ -38,10 +38,6 @@ const blocks: Components = [
   {
     type: 'heading',
     component: RHeading,
-  },
-  {
-    type: 'image',
-    component: RImage,
   },
   {
     type: 'fence',
@@ -121,6 +117,10 @@ const inline: Components = [
   {
     type: 's',
     component: RS,
+  },
+  {
+    type: 'image',
+    component: RImage,
   },
 ]
 

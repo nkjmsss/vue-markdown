@@ -50,6 +50,11 @@ describe('lib/markdown', () => {
         test('h5', check('##### heading'))
         test('h6', check('###### heading'))
       })
+
+      describe('image', () => {
+        test('normal', check('![placeholder](https://via.placeholder.com/1000)'))
+        test('with title', check('![placeholder](https://via.placeholder.com/1000 "title")'))
+      })
     })
 
     // complicated

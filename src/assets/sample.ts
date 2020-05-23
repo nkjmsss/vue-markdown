@@ -28,6 +28,14 @@ export const sample = `# Vue-markdown
 
 \`[link](url)\`というようにすると、[link](https://example.com)になります。
 
+#### 画像
+
+inlineの文法ですが、blockとしてrenderします。
+
+\`![name](href)\`というようにすると、画像が読み込めます。
+
+![placeholder](https://via.placeholder.com/1000)
+
 ### ブロック要素
 
 これらの要素については、基本的に前後に空行を設けるようにしてください。
@@ -41,14 +49,6 @@ export const sample = `# Vue-markdown
 前後に空行のあるテキストは段落として扱われます。マークダウンの仕様として、改行しても認識されないので必ず空行を開けて段落を変えるようにしてください。
 
 このような感じにするように、ということです。
-
-#### 画像
-
-本来はinline-blockですが、blockとしてrenderします。
-
-\`![name](href)\`というようにすると、画像が読み込めます。
-
-![placeholder](https://via.placeholder.com/1000)
 
 #### 引用
 
