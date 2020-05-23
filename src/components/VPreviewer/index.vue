@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { Components, components, fallbackComponent } from './Renderers'
-import { CreateMdOptions, MarkdownItToken, Token, createAST, createMd, tokensToString } from '@/lib/markdown'
+import { CreateMdOptions, Token, createAST, createMd, tokensToString } from '@/lib/markdown'
 import Vue, { PropType, VueConstructor } from 'vue'
 
 export default Vue.extend({
@@ -16,15 +16,15 @@ export default Vue.extend({
       default: () => [],
     },
     mdOptions: {
-      type: Object as PropType<CreateMdOptions['options']>,
-      default: () => ({}),
+      type: Object as PropType<Exclude<CreateMdOptions['options'], undefined>>,
+      default: () => ({} as CreateMdOptions['options']),
     },
     mdDisableRules: {
-      type: Array as PropType<CreateMdOptions['disableRules']>,
+      type: Array as PropType<Exclude<CreateMdOptions['disableRules'], undefined>>,
       default: () => [],
     },
     mdPlugins: {
-      type: Array as PropType<CreateMdOptions['plugins']>,
+      type: Array as PropType<Exclude<CreateMdOptions['plugins'], undefined>>,
       default: () => [],
     },
   },
@@ -69,6 +69,8 @@ export default Vue.extend({
   render() {
     const render = (tokens: Token[]) =>
       tokens.map(token => {
+        if (!this.mdOptions.breaks && token.type === 'softbreak') return null
+
         const Component = this.getComponent(token.type)
         return <Component token={token}>{render(token.children)}</Component>
       })

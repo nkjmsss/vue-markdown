@@ -3,11 +3,13 @@ import RDefault from './RDefault.vue'
 
 import RCode from './inline/RCode.vue'
 import REm from './inline/REm.vue'
+import RHardbreak from './inline/RHardbreak.vue'
 import RImage from './inline/RImage.vue'
 import RIns from './inline/RIns.vue'
 import RLink from './inline/RLink.vue'
 import RMark from './inline/RMark.vue'
 import RS from './inline/RS.vue'
+import RSoftbreak from './inline/RSoftBreak.vue'
 import RText from './inline/RText.vue'
 
 import RBlockquote from './block/RBlockquote.vue'
@@ -121,6 +123,14 @@ const inline: Components = [
   {
     type: 'image',
     component: RImage,
+  },
+  {
+    type: 'hardbreak',
+    component: RHardbreak,
+  },
+  {
+    type: 'softbreak',
+    component: RSoftbreak,
   },
 ]
 

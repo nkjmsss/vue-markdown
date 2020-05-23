@@ -40,6 +40,23 @@ describe('lib/markdown', () => {
       })
 
       test('code', check('`foobar`'))
+
+      describe('linebreaks', () => {
+        test(
+          'softbreak',
+          check(
+            'one', //
+            'two',
+          ),
+        )
+        test(
+          'hardbreak',
+          check(
+            'one  ', //
+            'two',
+          ),
+        )
+      })
     })
 
     // block rules

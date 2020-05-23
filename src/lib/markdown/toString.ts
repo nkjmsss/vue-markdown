@@ -40,6 +40,12 @@ export const tokensToString = (tokens: readonly Token[]): string => {
 
             return `![${content}](${src}${title})`
           }
+          case 'softbreak': {
+            return '\n'
+          }
+          case 'hardbreak': {
+            return '  \n'
+          }
 
           // block
           case 'paragraph': {
