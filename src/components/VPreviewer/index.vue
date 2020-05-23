@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { Components, components, fallbackComponent } from './Renderers'
-import { CreateMdOptions, MarkdownItToken, Token, createAST, createMd } from '@/lib/markdown'
+import { CreateMdOptions, MarkdownItToken, Token, createAST, createMd, markdownItTokensToString } from '@/lib/markdown'
 import Vue, { PropType, VueConstructor } from 'vue'
 
 export default Vue.extend({
@@ -38,15 +38,19 @@ export default Vue.extend({
       })
     },
 
-    markdownitTokens(): MarkdownItToken[] {
-      return this.markdown.parse(this.value, {})
-    },
-
     tokens(): Token[] {
       return createAST({
         src: this.value,
         tokenizer: (src: string) => this.markdown.parse(src, {}),
       })
+    },
+
+    markdownitTokens(): MarkdownItToken[] {
+      return this.markdown.parse(this.value, {})
+    },
+
+    stringfiedTokens(): string {
+      return markdownItTokensToString(this.markdownitTokens)
     },
   },
 
