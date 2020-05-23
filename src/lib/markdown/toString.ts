@@ -1,14 +1,31 @@
-import { MarkdownItToken } from './tokens'
+import { Token } from './tokens'
 
-export const markdownItTokensToString = (tokens: readonly MarkdownItToken[]): string => {
-  const _toStr = (tokens: readonly MarkdownItToken[]): string => {
+export const tokensToString = (tokens: readonly Token[]): string => {
+  const toStr = (tokens: readonly Token[]): string => {
     return tokens
-      .map(token => {
-        const content = token.children && token.children.length > 0 ? _toStr(token.children) : token.content
-        return `${token.markup}${content}`
+      .map<string>(token => {
+        const content = (token.children && token.children.length > 0 ? toStr(token.children) : token.content) || ''
+
+        switch (token.type) {
+          case 'strong':
+          case 'em':
+          case 'ins':
+          case 'mark': {
+            const markup = token.markup
+            return `${markup}${content}${markup}`
+          }
+          case 'link': {
+            const href = token.attrs.href || ''
+            const title = token.attrs.title ? ` "${token.attrs.title}"` : ''
+
+            return `[${content}](${href}${title})`
+          }
+        }
+
+        return content
       })
       .join('')
   }
 
-  return _toStr(tokens)
+  return toStr(tokens)
 }

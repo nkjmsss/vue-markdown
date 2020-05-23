@@ -16,4 +16,6 @@ export interface Token {
   children: Token[]
   content?: string
   info: string
+  block: boolean
+  markup: string
 }

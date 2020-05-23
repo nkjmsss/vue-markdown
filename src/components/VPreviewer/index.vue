@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { Components, components, fallbackComponent } from './Renderers'
-import { CreateMdOptions, MarkdownItToken, Token, createAST, createMd, markdownItTokensToString } from '@/lib/markdown'
+import { CreateMdOptions, MarkdownItToken, Token, createAST, createMd, tokensToString } from '@/lib/markdown'
 import Vue, { PropType, VueConstructor } from 'vue'
 
 export default Vue.extend({
@@ -45,12 +45,8 @@ export default Vue.extend({
       })
     },
 
-    markdownitTokens(): MarkdownItToken[] {
-      return this.markdown.parse(this.value, {})
-    },
-
     stringfiedTokens(): string {
-      return markdownItTokensToString(this.markdownitTokens)
+      return tokensToString(this.tokens)
     },
   },
 
@@ -67,7 +63,6 @@ export default Vue.extend({
   },
 
   render() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const render = (tokens: Token[]) =>
       tokens.map(token => {
         const Component = this.getComponent(token.type)
@@ -80,9 +75,12 @@ export default Vue.extend({
         <pre>
           <code>{this.stringfiedTokens}</code>
         </pre>
+        <hr />
         <pre>
-          <code>{JSON.stringify(this.markdownitTokens, null, 4)}</code>
+          <code>{JSON.stringify(this.tokens, null, 4)}</code>
         </pre>
+        <hr />
+        <div>{render(this.tokens)}</div>
       </div>
     )
   },

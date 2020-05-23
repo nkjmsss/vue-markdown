@@ -54,6 +54,8 @@ export const createAST = ({
         children: [],
         content: token.content,
         info: token.info,
+        block: token.block,
+        markup: token.markup,
       }
 
       res.push([
