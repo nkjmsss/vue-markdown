@@ -32,3 +32,12 @@ export default RendererBase.extend({
   },
 })
 </script>
+
+<style lang="scss" scoped>
+@import '../styles/mixins';
+
+.renderer-link {
+  font-weight: 600;
+  color: colors(primary);
+}
+</style>
