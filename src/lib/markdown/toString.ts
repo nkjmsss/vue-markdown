@@ -11,6 +11,8 @@ const removeLastBrs = (src: string): string =>
     }, [] as string[])
     .join('\n')
 
+const transpose = <T>(a: T[][]) => a[0].map((_, c) => a.map(r => r[c]))
+
 export const tokensToString = (tokens: readonly Token[]): string => {
   const getContent = (token: Token): string =>
     (token.children && token.children.length > 0 ? toStr(token.children) : token.content) || ''
@@ -69,6 +71,49 @@ export const tokensToString = (tokens: readonly Token[]): string => {
           case 'ordered_list': {
             const num = token.attrs.start !== undefined ? Number(token.attrs.start) : 1
             return token.children.map(t => `${num}${t.markup} ${getContent(t)}`).join('\n')
+          }
+          case 'table': {
+            // table > (thead>tr) + (tbody>tr)
+            const _table = token.children.flatMap(theadOrBody =>
+              theadOrBody.children.map(tr => tr.children.map(tdOrTh => getContent(tdOrTh))),
+            )
+            const maxLength = transpose(_table).map(r => Math.max(...r.map(d => d.length)))
+
+            const table = _table.map(r => r.map((d, i) => d.padEnd(maxLength[i], ' ')))
+            const [thead, ...tbody] = table
+
+            const _alignment = token.children.flatMap(theadOrBody =>
+              theadOrBody.children.map(tr =>
+                tr.children.map(tdOrTh => {
+                  const style = (tdOrTh.attrs.style as string) || ''
+                  const align = style.replace(/.?;?\s*text-align\s*:\s*(.+)\s*;?.*/, '$1')
+                  return align
+                }),
+              ),
+            )
+            const alignment = transpose(_alignment).map(col => (col.every((v, i, arr) => v === arr[0]) ? col[0] : ''))
+            const alignmentLine = `|${alignment
+              .map((align, i) => {
+                switch (align) {
+                  case 'left': {
+                    return `:${'-'.repeat(maxLength[i] + 1)}`
+                  }
+                  case 'right': {
+                    return `${'-'.repeat(maxLength[i] + 1)}:`
+                  }
+                  case 'center': {
+                    return `:${'-'.repeat(maxLength[i])}:`
+                  }
+                  default: {
+                    return '-'.repeat(maxLength[i] + 2)
+                  }
+                }
+              })
+              .join('|')}|`
+
+            const formatTr = (tr: string[]) => `| ${tr.join(' | ')} |`
+
+            return [formatTr(thead), alignmentLine, ...tbody.map(tr => formatTr(tr))].join('\n')
           }
         }
 

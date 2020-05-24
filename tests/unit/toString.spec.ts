@@ -125,6 +125,31 @@ describe('lib/markdown', () => {
           ),
         )
       })
+
+      describe('table', () => {
+        test(
+          'normal',
+          check(
+            '| th1     | th2     | th3     |',
+            '|---------|---------|---------|',
+            '| td1-1   | td1-2   | td1-3   |',
+            '| td2-1   | td2-2   | td2-3   |',
+          ),
+        )
+        test(
+          'left center right',
+          check(
+            '| Left align | Right align | Center align |',
+            '|:-----------|------------:|:------------:|',
+            '| This       | This        | This         |',
+            '| column     | column      | column       |',
+            '| will       | will        | will         |',
+            '| be         | be          | be           |',
+            '| left       | right       | center       |',
+            '| aligned    | aligned     | aligned      |',
+          ),
+        )
+      })
     })
 
     // complicated
