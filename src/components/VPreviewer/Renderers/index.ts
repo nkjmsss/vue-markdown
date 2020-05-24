@@ -17,6 +17,7 @@ import RBulletList from './block/RBulletList.vue'
 import RFence from './block/RFence.vue'
 import RHTMLBlock from './block/RHTMLBlock.vue'
 import RHeading from './block/RHeading.vue'
+import RHr from './block/RHr.vue'
 import RListItem from './block/RListItem.vue'
 import ROrderedList from './block/ROrderedList.vue'
 import RParagraph from './block/RParagraph.vue'
@@ -89,6 +90,10 @@ const blocks: Components = [
   {
     type: 'html_block',
     component: RHTMLBlock,
+  },
+  {
+    type: 'hr',
+    component: RHr,
   },
 ]
 

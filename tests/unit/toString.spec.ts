@@ -245,6 +245,14 @@ describe('lib/markdown', () => {
         test('div', check('<div>foobar</div>'))
         test('div > strong', check('<div>foo<strong>bar</strong></div>'))
       })
+
+      describe('hr', () => {
+        test('---', check('---'))
+        test('***', check('***'))
+        test('___', check('___'))
+        test('- - -', check('- - -'))
+        test('-- - --', check('-- - --'))
+      })
     })
 
     // complicated

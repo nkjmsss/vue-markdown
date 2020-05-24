@@ -123,6 +123,9 @@ export const tokensToString = (tokens: readonly Token[]): string => {
             case 'html_block': {
               return getContent(token)
             }
+            case 'hr': {
+              return token.markup
+            }
           }
 
           return getContent(token)
