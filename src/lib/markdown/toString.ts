@@ -115,6 +115,9 @@ export const tokensToString = (tokens: readonly Token[]): string => {
 
             return [formatTr(thead), alignmentLine, ...tbody.map(tr => formatTr(tr))].join('\n')
           }
+          case 'fence': {
+            return `${token.markup}${token.info}\n${getContent(token)}${token.markup}`
+          }
         }
 
         return getContent(token)

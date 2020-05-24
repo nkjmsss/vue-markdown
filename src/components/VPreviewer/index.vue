@@ -79,7 +79,7 @@ export default Vue.extend({
     return (
       <div class="v-previewer">
         <pre style="max-height: 80vh; overflow: scroll;">
-          <code>{render(this.tokenize(`\`\`\`\n${this.stringfiedTokens}\n\`\`\``))}</code>
+          <code>{render(this.tokenize(`\`\`\`\`\n${this.stringfiedTokens}\n\`\`\`\``))}</code>
         </pre>
         <hr />
         <details>

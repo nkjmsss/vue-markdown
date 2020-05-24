@@ -150,6 +150,81 @@ describe('lib/markdown', () => {
           ),
         )
       })
+
+      describe('fence', () => {
+        test(
+          'without language',
+          check(
+            '```', //
+            'sample',
+            'code',
+            '```',
+          ),
+        )
+        test(
+          'ends with blank line',
+          check(
+            '```', //
+            'sample',
+            '',
+            '```',
+          ),
+        )
+        test(
+          'with language',
+          check(
+            '```java', //
+            'sample',
+            '',
+            '```',
+          ),
+        )
+        test(
+          'with language (space before)',
+          check(
+            '```  java', //
+            'sample',
+            '',
+            '```',
+          ),
+        )
+        test(
+          'with language (space after)',
+          check(
+            '```java  ', //
+            'sample',
+            '',
+            '```',
+          ),
+        )
+        test(
+          'with language (space before and after)',
+          check(
+            '``` java ', //
+            'sample',
+            '',
+            '```',
+          ),
+        )
+        test(
+          'with 4 backquote',
+          check(
+            '````', //
+            'sample',
+            '',
+            '````',
+          ),
+        )
+        test(
+          'with 5 backquote',
+          check(
+            '`````', //
+            'sample',
+            '',
+            '`````',
+          ),
+        )
+      })
     })
 
     // complicated
