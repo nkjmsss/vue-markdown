@@ -11,13 +11,19 @@ const removeLastBrs = (src: string): string =>
     }, [] as string[])
     .join('\n')
 
+const appendHeadEachLine = (src: string, mark: string): string =>
+  src
+    .split('\n')
+    .map(s => `${mark}${s}`)
+    .join('\n')
+
 const transpose = <T>(a: T[][]) => a[0].map((_, c) => a.map(r => r[c]))
 
 export const tokensToString = (tokens: readonly Token[]): string => {
-  const getContent = (token: Token): string =>
-    (token.children && token.children.length > 0 ? toStr(token.children) : token.content) || ''
+  const getContent = (token: Token, isParentBlock = false): string =>
+    (token.children && token.children.length > 0 ? toStr(token.children, isParentBlock) : token.content) || ''
 
-  const toStr = (tokens: readonly Token[]): string => {
+  const toStr = (tokens: readonly Token[], isParentBlock = false): string => {
     return tokens
       .map<string>(token => {
         const c = (() => {
@@ -59,19 +65,14 @@ export const tokensToString = (tokens: readonly Token[]): string => {
               return `${token.markup} ${getContent(token)}`
             }
             case 'blockquote': {
-              const markAppended = removeLastBrs(getContent(token))
-                .split('\n')
-                .map(c => `${token.markup} ${c}`)
-                .join('\n')
-
-              return `${markAppended}`
+              return appendHeadEachLine(removeLastBrs(getContent(token)), `${token.markup} `)
             }
             case 'bullet_list': {
-              return token.children.map(t => `${t.markup} ${getContent(t)}`).join('\n')
+              return token.children.map(t => `${t.markup} ${getContent(t, true)}`).join('\n')
             }
             case 'ordered_list': {
               const num = token.attrs.start !== undefined ? Number(token.attrs.start) : 1
-              return token.children.map(t => `${num}${t.markup} ${getContent(t)}`).join('\n')
+              return token.children.map(t => `${num}${t.markup} ${getContent(t, true)}`).join('\n')
             }
             case 'table': {
               // table > (thead>tr) + (tbody>tr)
@@ -126,6 +127,12 @@ export const tokensToString = (tokens: readonly Token[]): string => {
 
           return getContent(token)
         })()
+
+        if (isParentBlock) {
+          if (token.block) {
+            return `\n${removeLastBrs(appendHeadEachLine(c, '    '))}`
+          }
+        }
 
         return token.block ? `${c}\n\n` : c
       })
