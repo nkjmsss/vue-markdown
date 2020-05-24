@@ -9,12 +9,13 @@ import RIns from './inline/RIns.vue'
 import RLink from './inline/RLink.vue'
 import RMark from './inline/RMark.vue'
 import RS from './inline/RS.vue'
-import RSoftbreak from './inline/RSoftBreak.vue'
+import RSoftbreak from './inline/RSoftbreak.vue'
 import RText from './inline/RText.vue'
 
 import RBlockquote from './block/RBlockquote.vue'
 import RBulletList from './block/RBulletList.vue'
 import RFence from './block/RFence.vue'
+import RHTMLBlock from './block/RHTMLBlock.vue'
 import RHeading from './block/RHeading.vue'
 import RListItem from './block/RListItem.vue'
 import ROrderedList from './block/ROrderedList.vue'
@@ -84,6 +85,10 @@ const blocks: Components = [
   {
     type: 'th',
     component: RTh,
+  },
+  {
+    type: 'html_block',
+    component: RHTMLBlock,
   },
 ]
 

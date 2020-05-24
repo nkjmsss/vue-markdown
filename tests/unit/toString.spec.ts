@@ -233,6 +233,11 @@ describe('lib/markdown', () => {
           ),
         )
       })
+
+      describe('html_block', () => {
+        test('div', check('<div>foobar</div>'))
+        test('div > strong', check('<div>foo<strong>bar</strong></div>'))
+      })
     })
 
     // complicated

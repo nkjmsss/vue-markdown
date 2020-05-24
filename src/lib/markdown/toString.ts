@@ -119,6 +119,9 @@ export const tokensToString = (tokens: readonly Token[]): string => {
             case 'fence': {
               return `${token.markup}${token.info}\n${getContent(token)}${token.markup}`
             }
+            case 'html_block': {
+              return getContent(token)
+            }
           }
 
           return getContent(token)
