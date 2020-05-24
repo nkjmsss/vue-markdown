@@ -1,4 +1,5 @@
 import { createAST, createMd, tokensToString } from '@/lib/markdown'
+import { sample } from '@/assets/sample'
 
 const md = createMd()
 const check = (...src: string[]) => () => {
@@ -94,6 +95,13 @@ describe('lib/markdown', () => {
           check(
             '- foo', //
             '- bar',
+          ),
+        )
+        test(
+          '* markup',
+          check(
+            '* foo', //
+            '* bar',
           ),
         )
       })
@@ -238,6 +246,33 @@ describe('lib/markdown', () => {
         test('strong > ins', check('**strong++ins++**'))
         test('link > em', check('[link*em*](https://example.com "title")'))
         test('em > strike', check('_~~strike~~em_'))
+      })
+
+      describe('block + block', () => {
+        test(
+          'heading + ul',
+          check(
+            '# heading', //
+            '',
+            '- list',
+            '- list',
+          ),
+        )
+
+        test(
+          'ul + ol',
+          check(
+            '- ul', //
+            '- ul',
+            '',
+            '1. ol',
+            '1. ol',
+          ),
+        )
+      })
+
+      describe('test sample', () => {
+        test('sample', check(sample))
       })
     })
   })
