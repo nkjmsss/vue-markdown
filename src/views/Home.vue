@@ -8,8 +8,8 @@
 
 <script lang="ts">
 import { VEditor } from '@/components'
+import { sample } from '@/assets/md'
 import Vue from 'vue'
-import sample from '@/assets/sample.md'
 
 export default Vue.extend({
   name: 'Home',

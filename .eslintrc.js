@@ -21,7 +21,13 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': [0],
     '@typescript-eslint/no-use-before-define': [0],
     '@typescript-eslint/no-namespace': [0],
-    '@typescript-eslint/no-unused-vars': [1],
+    '@typescript-eslint/no-unused-vars': [
+      1,
+      {
+        argsIgnorePattern: '^_',
+      },
+    ],
+    '@typescript-eslint/no-var-requires': [0],
     '@typescript-eslint/member-delimiter-style': [0],
     'babel/no-unused-expressions': [2],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
