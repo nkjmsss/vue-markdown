@@ -25,6 +25,7 @@ module.exports = {
       1,
       {
         argsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
       },
     ],
     '@typescript-eslint/no-var-requires': [0],
