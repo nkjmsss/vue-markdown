@@ -4,9 +4,7 @@
       <v-input :value="value" @input="handleInput" />
     </div>
 
-    <!-- <div class="v-editor__output"> -->
     <v-previewer class="v-editor__output" :value="innerValue" />
-    <!-- </div> -->
   </div>
 </template>
 

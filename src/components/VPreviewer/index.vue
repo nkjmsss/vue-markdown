@@ -27,6 +27,10 @@ export default Vue.extend({
       type: Array as PropType<Exclude<CreateMdOptions['plugins'], undefined>>,
       default: () => [],
     },
+    editable: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
@@ -72,26 +76,30 @@ export default Vue.extend({
         if (!this.mdOptions.breaks && token.type === 'softbreak') return null
 
         const Component = this.getComponent(token.type)
-        return <Component token={token}>{render(token.children)}</Component>
+        return (
+          <Component token={token} editable={this.editable}>
+            {render(token.children)}
+          </Component>
+        )
       })
 
-    // return <div class="v-previewer">{render(this.tokens)}</div>
-    return (
-      <div class="v-previewer">
-        <pre style="max-height: 80vh; overflow: scroll;">
-          <code>{render(this.tokenize(`\`\`\`\`\n${this.stringfiedTokens}\n\`\`\`\``))}</code>
-        </pre>
-        <hr />
-        <details>
-          <summary>tokens</summary>
-          <pre style="max-height: 80vh; overflow: scroll;">
-            <code>{render(this.tokenize(`\`\`\`\n${JSON.stringify(this.tokens, null, 4)}\n\`\`\``))}</code>
-          </pre>
-        </details>
-        <hr />
-        <div>{render(this.tokens)}</div>
-      </div>
-    )
+    return <div class="v-previewer">{render(this.tokens)}</div>
+    // return (
+    //   <div class="v-previewer">
+    //     <pre style="max-height: 80vh; overflow: scroll;">
+    //       <code>{render(this.tokenize(`\`\`\`\`\n${this.stringfiedTokens}\n\`\`\`\``))}</code>
+    //     </pre>
+    //     <hr />
+    //     <details>
+    //       <summary>tokens</summary>
+    //       <pre style="max-height: 80vh; overflow: scroll;">
+    //         <code>{render(this.tokenize(`\`\`\`\n${JSON.stringify(this.tokens, null, 4)}\n\`\`\``))}</code>
+    //       </pre>
+    //     </details>
+    //     <hr />
+    //     <div>{render(this.tokens)}</div>
+    //   </div>
+    // )
   },
 })
 </script>
