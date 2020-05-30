@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <pre class="pre"><code>{{value}}</code></pre>
     <div class="editor-wrap">
       <v-previewer v-model="value" editable />
     </div>
@@ -25,6 +26,11 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.pre {
+  max-height: 20vh;
+  overflow: scroll;
+}
+
 .editor-wrap {
   height: 90vh;
 }

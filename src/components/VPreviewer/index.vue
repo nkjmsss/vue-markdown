@@ -34,6 +34,15 @@ export default Vue.extend({
   },
 
   computed: {
+    innerValue: {
+      get(): string {
+        return this.value
+      },
+      set(v: string) {
+        this.$emit('input', v)
+      },
+    },
+
     markdown(): ReturnType<typeof createMd> {
       return createMd({
         options: this.mdOptions,
@@ -43,7 +52,7 @@ export default Vue.extend({
     },
 
     tokens(): Token[] {
-      return this.tokenize(this.value)
+      return this.tokenize(this.innerValue)
     },
 
     stringfiedTokens(): string {
@@ -68,6 +77,29 @@ export default Vue.extend({
         tokenizer: (src: string) => this.markdown.parse(src, {}),
       })
     },
+
+    updateToken(originalToken: Token, newToken: Token) {
+      const getNewToken = <T extends Token[]>(tokens: T): T => {
+        const idx = tokens.findIndex(t => t === originalToken)
+        if (idx >= 0) {
+          const clonedTokens = [...tokens] as T
+          clonedTokens.splice(idx, 1, newToken)
+          return clonedTokens
+        }
+
+        const newTokens = tokens.map(token =>
+          token.children.length > 0
+            ? {
+                ...token,
+                children: getNewToken(token.children),
+              }
+            : token,
+        ) as T
+        return newTokens
+      }
+
+      this.innerValue = tokensToString(getNewToken(this.tokens))
+    },
   },
 
   render() {
@@ -77,7 +109,11 @@ export default Vue.extend({
 
         const Component = this.getComponent(token.type)
         return (
-          <Component token={token} editable={this.editable}>
+          <Component
+            token={token}
+            editable={this.editable}
+            onUpdateToken={(newToken: Token) => this.updateToken(token, newToken)}
+          >
             {render(token.children)}
           </Component>
         )
