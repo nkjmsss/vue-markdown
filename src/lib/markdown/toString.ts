@@ -33,10 +33,15 @@ export const tokensToString = (tokens: readonly Token[]): string => {
             case 'em':
             case 'ins':
             case 'mark':
-            case 's':
-            case 'code_inline': {
+            case 's': {
               const markup = token.markup
               return `${markup}${getContent(token, token)}${markup}`
+            }
+            case 'code_inline': {
+              const markup = token.markup
+              const content = getContent(token, token)
+              const insertSpace = /(^`)|(`$)/.test(content) ? ' ' : ''
+              return `${markup}${insertSpace}${getContent(token, token)}${insertSpace}${markup}`
             }
             case 'link': {
               const href = token.attrs.href || ''

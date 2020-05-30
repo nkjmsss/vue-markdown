@@ -23,7 +23,15 @@ wrap('inline', () => {
     test('with title', check('[link](https://example.com "title")'))
   })
 
-  test('code', check('`foobar`'))
+  describe('code', () => {
+    test('normal', check('`foobar`'))
+    describe('with backquote', () => {
+      test('2 > 1', check('`` `a` ``'))
+      test('3 > 2', check('``` ``double-back-quote`` ```'))
+      test('only space before', check('`` `code`some string``'))
+      test('only space after', check('``some string`code` ``'))
+    })
+  })
 
   describe('linebreaks', () => {
     test(
