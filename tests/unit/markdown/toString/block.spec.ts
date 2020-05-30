@@ -236,4 +236,9 @@ wrap('block', () => {
     test('- - -', check('- - -'))
     test('-- - --', check('-- - --'))
   })
+
+  describe('paragraph', () => {
+    test('ol like', check('1999\\. foo'))
+    test('ul like', check('\\- foo'))
+  })
 })

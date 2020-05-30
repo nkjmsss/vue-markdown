@@ -64,7 +64,13 @@ export const tokensToString = (tokens: readonly Token[]): string => {
 
             // block
             case 'paragraph': {
-              return `${getContent(token, token)}`
+              const content = getContent(token, token)
+              const normalizedContent = content
+                // normalize ul
+                .replace(/^- (.+)/gm, '\\- $1')
+                // normalize ol
+                .replace(/^(\d+)\. (.+)/gm, '$1\\. $2')
+              return normalizedContent
             }
             case 'heading': {
               return `${token.markup} ${getContent(token, token)}`
