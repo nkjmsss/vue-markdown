@@ -84,6 +84,26 @@ wrap('nested', () => {
       ),
     )
     test(
+      'ul > code_block',
+      check(
+        '* hoge', //
+        '',
+        '        foo',
+        '        bar',
+        '* foo',
+      ),
+    )
+    test(
+      'ol > code_block',
+      check(
+        '1. hoge', //
+        '',
+        '        foo',
+        '        bar',
+        '1. foo',
+      ),
+    )
+    test(
       'blockquote > blockquote',
       check(
         '> hoge', //
@@ -107,6 +127,15 @@ wrap('nested', () => {
         '> ',
         '> - list',
         '> - list',
+      ),
+    )
+    test(
+      'blockquote > code_block',
+      check(
+        '> foobar', //
+        '>',
+        '>     code block',
+        '>     > this is not blockquote',
       ),
     )
     test(

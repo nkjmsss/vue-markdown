@@ -14,6 +14,7 @@ import RText from './inline/RText.vue'
 
 import RBlockquote from './block/RBlockquote.vue'
 import RBulletList from './block/RBulletList.vue'
+import RCodeBlock from './block/RCodeBlock.vue'
 import RFence from './block/RFence.vue'
 import RHTMLBlock from './block/RHTMLBlock.vue'
 import RHeading from './block/RHeading.vue'
@@ -46,6 +47,10 @@ const blocks: Components = [
   {
     type: 'fence',
     component: RFence,
+  },
+  {
+    type: 'code_block',
+    component: RCodeBlock,
   },
   {
     type: 'bullet_list',

@@ -178,6 +178,50 @@ wrap('block', () => {
         '`````',
       ),
     )
+    test(
+      '~~~',
+      check(
+        '~~~', //
+        'sample',
+        '~~~',
+      ),
+    )
+  })
+
+  describe('code_block', () => {
+    test(
+      '4 space indent',
+      check(
+        '    sample', //
+        '    foo',
+        '    bar',
+      ),
+    )
+    test(
+      '8 space indent',
+      check(
+        '        sample', //
+        '        foo',
+        '        bar',
+      ),
+    )
+    test('heading like', check('    # foo'))
+    test('blockquote like', check('    > foo'))
+    test('ul like', check('    - foo'))
+    test('ol like', check('    1. foo'))
+    test(
+      'table like',
+      check(
+        '    | Left align | Right align | Center align |',
+        '    |:-----------|------------:|:------------:|',
+        '    | This       | This        | This         |',
+        '    | column     | column      | column       |',
+        '    | will       | will        | will         |',
+        '    | be         | be          | be           |',
+        '    | left       | right       | center       |',
+        '    | aligned    | aligned     | aligned      |',
+      ),
+    )
   })
 
   describe('html_block', () => {

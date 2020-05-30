@@ -9,9 +9,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test": "run-s \"test:* {1}\" --",
+    "test": "run-s \"test:* {@}\" --",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "run-s \"lint:* {1}\" --",
+    "lint": "run-s \"lint:* {@}\" --",
     "lint:script": "vue-cli-service lint",
     "lint:style": "vue-cli-service lint:style"
   },
