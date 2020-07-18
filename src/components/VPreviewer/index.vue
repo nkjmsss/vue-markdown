@@ -1,4 +1,5 @@
 <script lang="tsx">
+import { Caret } from '@/lib/caret'
 import { Components, components, fallbackComponent } from './Renderers'
 import { CreateMdOptions, Token, createAST, createMd, tokensToString } from '@/lib/markdown'
 import Vue, { PropType, VueConstructor } from 'vue'
@@ -33,6 +34,10 @@ export default Vue.extend({
     },
   },
 
+  data: () => ({
+    caret: new Caret(),
+  }),
+
   computed: {
     markdown(): ReturnType<typeof createMd> {
       return createMd({
@@ -49,6 +54,26 @@ export default Vue.extend({
     stringfiedTokens(): string {
       return tokensToString(this.tokens)
     },
+  },
+
+  watch: {
+    editable: {
+      handler(v: boolean) {
+        if (v) {
+          const previewer = this.$refs.previewer as HTMLDivElement
+          this.caret.setTarget(previewer)
+          this.caret.observeStart()
+        } else {
+          this.caret.observeEnd()
+        }
+      },
+    },
+  },
+
+  mounted() {
+    const previewer = this.$refs.previewer as HTMLDivElement
+    this.caret.setTarget(previewer)
+    this.caret.observeStart()
   },
 
   methods: {
@@ -83,7 +108,11 @@ export default Vue.extend({
         )
       })
 
-    return <div class="v-previewer">{render(this.tokens)}</div>
+    return (
+      <div class="v-previewer" ref="previewer" contentEditable={this.editable}>
+        {render(this.tokens)}
+      </div>
+    )
     // return (
     //   <div class="v-previewer">
     //     <pre style="max-height: 80vh; overflow: scroll;">

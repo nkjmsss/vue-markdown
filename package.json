@@ -19,6 +19,7 @@
     "core-js": "^3.6.4",
     "fp-ts": "^2.5.4",
     "io-ts": "^2.2.1",
+    "lodash-es": "^4.17.15",
     "markdown-it": "^10.0.0",
     "markdown-it-color": "^1.0.5",
     "markdown-it-container": "^2.0.0",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@ascendancyy/vue-cli-plugin-stylelint": "^1.1.2",
     "@types/jest": "^24.0.19",
+    "@types/lodash-es": "^4.17.3",
     "@types/markdown-it": "^10.0.1",
     "@types/markdown-it-container": "^2.0.2",
     "@types/punycode": "^2.1.0",
