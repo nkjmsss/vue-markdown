@@ -19,6 +19,35 @@ const reshapeAttrs = (attrs: MarkdownItToken['attrs']): Record<string, string> =
   return Object.fromEntries(attrs || [])
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const extractHTMLTag = (
+  src: string,
+):
+  | {
+      tag: string
+      open: boolean
+      close: boolean
+      attrs: Record<string, string>
+    }
+  | false => {
+  // tagかの判定
+  const e = /<([^'"> ]*)(".*?"|'.*?'|[^'"])*?>/.exec(src)
+  if (!e) {
+    return false
+  }
+
+  const tag = e[1].replace('/', '')
+  const open = /^\/.*/.test(e[1])
+  const close = /(.*\/>$)|(<\/.*)/.test(src)
+
+  return {
+    tag,
+    open,
+    close,
+    attrs: {},
+  }
+}
+
 export const getContent = (
   tokens: (MarkdownItToken | Token)[],
   {
@@ -110,6 +139,10 @@ export const createAST = ({
 
         token.attrJoin('alt', token.children[0].content)
       }
+
+      // // html_inline
+      // if (token.type === 'html_inline') {
+      // }
 
       // default
       pushToRes(token)

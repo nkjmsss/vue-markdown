@@ -17,7 +17,10 @@ export default Vue.extend({
     },
     mdOptions: {
       type: Object as PropType<Exclude<CreateMdOptions['options'], undefined>>,
-      default: () => ({} as CreateMdOptions['options']),
+      default: () =>
+        ({
+          html: true,
+        } as CreateMdOptions['options']),
     },
     mdDisableRules: {
       type: Array as PropType<Exclude<CreateMdOptions['disableRules'], undefined>>,
